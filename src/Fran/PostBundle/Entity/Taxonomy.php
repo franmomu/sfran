@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Taxonomy
 {
+    const CATEGORY = 0;
+    const TAG = 1;
+
     /**
      * @var integer $id
      *
@@ -93,6 +96,24 @@ class Taxonomy
     public function getType()
     {
         return $this->type;
+    }
+
+    public static function getTypes()
+    {
+        return array(
+            self::CATEGORY  => 'Category',
+            self::TAG       => 'Tag'
+        );
+    }
+
+    public function isTag()
+    {
+        return $this->type == self::TAG;
+    }
+
+    public function isCategory()
+    {
+        return $this->type == self::CATEGORY;
     }
     
     /**
