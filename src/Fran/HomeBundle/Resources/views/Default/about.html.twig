@@ -1,5 +1,13 @@
 {% extends 'FranHomeBundle::layout.html.twig' %}
 
+{% block title 'About' %}
+
+{% block navbar %}
+    {% include 'FranHomeBundle::navbar.html.twig' with {'section': 'about'} %}
+{% endblock %}
+
 {% block body %}
-	This project is about test things
+	<div class="hero-unit">
+		<h1>This project is about tests</h1>
+	</div>
 {% endblock %}
