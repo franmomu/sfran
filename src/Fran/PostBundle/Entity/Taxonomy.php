@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Fran\PostBundle\Entity\Taxonomy
  *
- * @ORM\Table()
+ * @ORM\Table(name="taxonomy")
  * @ORM\Entity(repositoryClass="Fran\PostBundle\Entity\TaxonomyRepository")
  */
 class Taxonomy
