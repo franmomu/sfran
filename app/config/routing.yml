@@ -1,3 +1,8 @@
+FranPostBundle:
+    resource: "@FranPostBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 FranHomeBundle:
     resource: "@FranHomeBundle/Controller/"
     type:     annotation
