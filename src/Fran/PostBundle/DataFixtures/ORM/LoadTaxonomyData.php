@@ -14,11 +14,12 @@ class LoadTaxonomyData extends AbstractFixture implements OrderedFixtureInterfac
     	for ($i=1; $i <= 20; $i++) { 
 
 			$taxonomy = new Taxonomy();
-			$taxonomy->setName(sprintf('Taxonomy%s', $i));
 			if(rand(0,1)) {
 				$taxonomy->setType(Taxonomy::CATEGORY);
+				$taxonomy->setName(sprintf('Cat-%s', $i));
 			} else {
 				$taxonomy->setType(Taxonomy::TAG);
+				$taxonomy->setName(sprintf('Tag-%s', $i));
 			}
         	$manager->persist($taxonomy);   
 
