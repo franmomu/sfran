@@ -4,6 +4,7 @@ namespace Fran\PostBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
+use Fran\PostBundle\Entity\Taxonomy;
 
 class TaxonomyType extends AbstractType
 {
@@ -11,8 +12,9 @@ class TaxonomyType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('type')
-            ->add('posts')
+            ->add('type', 'choice', array(
+                'choices' => Taxonomy::getTypes()
+            ))
         ;
     }
 

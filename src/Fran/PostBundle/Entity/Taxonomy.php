@@ -106,6 +106,16 @@ class Taxonomy
         );
     }
 
+    public function getNamedType()
+    {
+        $types = self::getTypes();
+        if (isset($types[$this->type])) {
+            return $types[$this->type];
+        }
+        return null;
+
+    }
+
     public function isTag()
     {
         return $this->type == self::TAG;
