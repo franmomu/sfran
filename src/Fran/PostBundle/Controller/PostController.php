@@ -110,7 +110,7 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('FranPostBundle:Post')->find($id);
+        $entity = $em->getRepository('FranPostBundle:Post')->findWithTaxonomies($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Post entity.');

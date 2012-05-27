@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class PostRepository extends EntityRepository
 {
+	public function findWithTaxonomies($id)
+	{
+		$entity = $this->getEntityManager()
+			->createQuery("SELECT p, tax FROM FranPostBundle:Post p JOIN p.taxonomies tax WHERE p.id = :id")
+			->setParameter('id', $id)
+			->getSingleResult();
+
+        return $entity;
+	}
 }
