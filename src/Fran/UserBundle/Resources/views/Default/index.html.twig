@@ -1,0 +1,10 @@
+{% extends 'FranHomeBundle::layout.html.twig' %}
+
+{% block navbar %}
+    {% include 'FranHomeBundle::navbar.html.twig' with {'section': 'secured'} %}
+{% endblock %}
+
+{% block body %}
+	<p>Hello {{ name }}!</p>
+	<a href="{{ path('_secured_logout') }}" title="Logout">Logout</a>
+{% endblock %}
