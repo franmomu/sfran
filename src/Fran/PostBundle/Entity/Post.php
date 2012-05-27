@@ -34,6 +34,10 @@ class Post
      */
     protected $taxonomies;
 
+    protected $tags;
+
+    protected $categories;
+
     /**
      * Get id
      *
@@ -86,5 +90,60 @@ class Post
     public function getTaxonomies()
     {
         return $this->taxonomies;
+    }
+
+    public function getTags()
+    {
+        if (isset($this->tags)) {
+            return $this->tags;
+        }
+        $tags = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach ($this->taxonomies as $tag) {
+            if($tag->isTag()) {
+                $tags[] = $tag;
+            }
+        }
+
+        return $tags;
+    }
+
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+        foreach ($tags as $tag) {
+            if (!$this->taxonomies->contains($tag)) {
+                $this->addTaxonomy($tag);
+            }
+        }
+    }
+
+    public function getCategories()
+    {
+        if (isset($this->categories)) {
+            return $this->categories;
+        }
+        $categories = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach ($this->taxonomies as $taxonomy) {
+            if($taxonomy->isCategory()) {
+                $categories[] = $taxonomy;
+            }
+        }
+
+        return $categories;
+    }
+
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+        foreach ($categories as $category) {
+            if (!$this->taxonomies->contains($category)) {
+                $this->addTaxonomy($category);
+            }
+        }
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }
