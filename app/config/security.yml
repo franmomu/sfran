@@ -14,6 +14,8 @@ security:
                 admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
         users_db:
             entity: { class: Fran\UserBundle\Entity\User }
+        secured_area:
+            id: fran_user_provider
 
     firewalls:
         dev:
