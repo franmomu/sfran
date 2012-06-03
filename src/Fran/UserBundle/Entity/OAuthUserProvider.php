@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface,
     Symfony\Component\Security\Core\User\UserInterface,
     Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
-use Fran\UserBundle\User;
+use Fran\UserBundle\Entity\User;
 
 /**
  * OAuthUserProvider
