@@ -40,6 +40,8 @@ security:
         main:
             pattern: ^/
             anonymous: ~
+    factories:
+        OAuthFactory: "%kernel.root_dir%/../vendor/bundles/Knp/Bundle/OAuthBundle/Resources/config/security_factories.xml"
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

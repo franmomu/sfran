@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new Fran\HomeBundle\FranHomeBundle(),
             new Fran\PostBundle\FranPostBundle(),
             new Fran\UserBundle\FranUserBundle(),
+            new Knp\Bundle\OAuthBundle\KnpOAuthBundle(),
+            new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
