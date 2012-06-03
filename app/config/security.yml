@@ -26,16 +26,37 @@ security:
 
         secured_area:
             pattern:    ^/secured/
-            provider: users_db
-            form_login:
-                check_path: /secured/login_check
-                login_path: /secured/login
+            oauth:
+                oauth_provider:    github
+                client_id:         <your_oauth_client_id>
+                secret:            <your_oauth_secret>
+                scope:             <your_oauth_scope>
+                check_path:        /secured/login_check
+                login_path:        /secured/login
+                failure_path:      /
             logout:
-                path:   /secured/logout
+                path: /secured/logout
                 target: /
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
+
+        # secured_area:
+        #     pattern:    ^/secured/
+        #     oauth:
+        #         oauth_provider:    github
+        #        client_id:         <your_oauth_client_id>
+        #        secret:            <your_oauth_secret>
+        #        scope:             <your_oauth_scope>
+        #         check_path:        /secured/login_check
+        #         login_path:        /secured/login
+        #         failure_path:      /
+        #     # form_login:
+        #     #     check_path: /secured/login_check
+        #     #     login_path: /secured/login
+        #     logout:
+        #         path:   /secured/logout
+        #         target: /
+        #     #anonymous: ~
+        #     #http_basic:
+        #     #    realm: "Secured Demo Area"
 
         main:
             pattern: ^/
