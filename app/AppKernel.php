@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new FOS\TwitterBundle\FOSTwitterBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

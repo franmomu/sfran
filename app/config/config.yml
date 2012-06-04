@@ -62,11 +62,21 @@ jms_security_extra:
     secure_controllers:  true
     secure_all_services: false
 
+services:
+    my.twitter.user:
+        class: Fran\UserBundle\Security\User\Provider\TwitterProvider
+        arguments:
+            twitter_oauth: "@fos_twitter.api"
+            userManager: "@fos_user.user_manager"
+            validator: "@validator"
+            session: "@session"
+
+
 fos_twitter:
         file: %kernel.root_dir%/../vendor/twitteroauth/twitteroauth/twitteroauth.php
         consumer_key: %twitter_consumer_key%
         consumer_secret: %twitter_consumer_secret%
-        callback_url: http://www.mascotinas.com/secured/login_check
+        callback_url: http://www.mascotinas.com/twitter/login_check
 
 hwi_oauth:
     resource_owners:
@@ -80,3 +90,8 @@ hwi_oauth:
             client_id:           %google_client_id%
             client_secret:       %google_client_secret%
             scope:               ""
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Fran\UserBundle\Entity\User

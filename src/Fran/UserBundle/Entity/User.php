@@ -4,15 +4,16 @@ namespace Fran\UserBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Entity\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Marcadotecnia\ArticulosBundle\Entity\Autor
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="Fran\UserBundle\Entity\UserRepository")
  */
-class User implements UserInterface
+class User extends BaseUser
 {
 	/**
      * @var integer $id
@@ -21,126 +22,21 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
+    /** 
+     * @var string
      */
-    protected $username;
+    protected $twitterID;
 
-    /**
-     * @var string $email
-     *
-     * @ORM\Column(name="email", unique="true", type="string", length=255)
-     * @Assert\Email()
+    /** 
+     * @var string
      */
-    protected $email;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\MinLength(6)
-     */
-    protected $password;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $salt;
+    protected $twitter_username;
 
     public function __construct()
     {
-        // Generación aleatoria del salt
-        $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string 
-     */
-    public function getSalt()
-    {
-        return $this->salt;
+        parent::__construct();
     }
 
     public function getRoles()
@@ -150,9 +46,46 @@ class User implements UserInterface
         );
     }
 
-    public function eraseCredentials()
+    /**
+     * Set twitterID
+     *
+     * @param string $twitterID
+     */
+    public function setTwitterID($twitterID)
     {
+        $this->twitterID = $twitterID;
+        $this->setUsername($twitterID);
+        $this->salt = '';
+    }
 
+    /**
+     * Get twitterID
+     *
+     * @return string 
+     */
+    public function getTwitterID()
+    {
+        return $this->twitterID;
+    }
+
+    /**
+     * Set twitter_username
+     *
+     * @param string $twitterUsername
+     */
+    public function setTwitterUsername($twitterUsername)
+    {
+        $this->twitter_username = $twitterUsername;
+    }
+
+    /**
+     * Get twitter_username
+     *
+     * @return string 
+     */
+    public function getTwitterUsername()
+    {
+        return $this->twitter_username;
     }
 
     public function equals(UserInterface $user)

@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
- * @Route("/secured")
+ * @Route("/twitter")
  */
 class SecuredController extends Controller
 {
