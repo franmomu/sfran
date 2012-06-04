@@ -16,6 +16,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface,
     Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 use Fran\UserBundle\Entity\User;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 /**
  * OAuthUserProvider
@@ -24,15 +26,33 @@ use Fran\UserBundle\Entity\User;
  */
 class OAuthUserProvider implements UserProviderInterface
 {
+
+    protected $container;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
     /**
      * {@inheritDoc}
      */
     public function loadUserByUsername($username)
     {
-        $user = new User();
-        $user->setUsername($usename);
-        $user->setEmail('test@test.com');
-        $user->setPassword('testtest');
+        $em = $this->container->get('doctrine')->getEntityManager();
+
+        $user = $em->getRepository('FranUserBundle:User')->findOneByUsername($username);
+
+        if (!$user) {
+            $user = new User();
+            $user->setUsername($username);
+            $user->setEmail('test@test.com');
+            $user->setPassword('testtest');
+            
+            $em->persist($user);
+            $em->flush();
+        }
+
         return $user;
     }
 

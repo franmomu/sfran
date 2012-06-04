@@ -27,6 +27,7 @@ security:
             security: false
 
         secured_area:
+            provider: secured_area
             pattern:    ^/secured/
             oauth:
                 oauth_provider:    github
