@@ -25,11 +25,13 @@ class User extends BaseUser
     protected $id;
 
     /** 
+     * @ORM\Column(name="twitter_id", type="string", length=255)
      * @var string
      */
     protected $twitterID;
 
     /** 
+     * @ORM\Column(name="twitter_username", type="string", length=255)
      * @var string
      */
     protected $twitter_username;

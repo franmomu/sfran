@@ -43,7 +43,7 @@ class TwitterProvider implements UserProviderInterface
         $user = $this->findUserByTwitterId($username);
 
 
-         $this->twitter_oauth->setOAuthToken( $this->session->get('access_token') , $this->session->get('access_token_secret'));
+        $this->twitter_oauth->setOAuthToken( $this->session->get('access_token') , $this->session->get('access_token_secret'));
 
         try {
              $info = $this->twitter_oauth->get('account/verify_credentials');
@@ -56,7 +56,7 @@ class TwitterProvider implements UserProviderInterface
                 $user = $this->userManager->createUser();
                 $user->setEnabled(true);
                 $user->setPassword('');
-                $user->setAlgorithm('');
+                //$user->setAlgorithm('');
             }
 
             $username = $info->screen_name;
@@ -65,7 +65,7 @@ class TwitterProvider implements UserProviderInterface
             $user->setTwitterID($info->id);
             $user->setTwitterUsername($username);
             $user->setEmail('');
-            $user->setFirstname($info->name);
+            $user->setUsername($info->screen_name);
 
             $this->userManager->updateUser($user);
         }
