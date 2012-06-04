@@ -16,34 +16,40 @@ security:
             entity: { class: Fran\UserBundle\Entity\User }
         secured_area:
             id: fran_user_provider
+        fos_twitter:
+                id: fos_twitter.auth
 
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        secured_area:
-            provider: secured_area
-            pattern:    ^/secured/
-            oauth:
-                oauth_provider:    github
-                client_id:         <your_oauth_client_id>
-                secret:            <your_oauth_secret>
-                scope:             <your_oauth_scope>
-                check_path:        /secured/login_check
-                login_path:        /secured/login
-                failure_path:      /
-            logout:
-                path: /secured/logout
-                target: /
+        secured:
+            pattern:   /secured/.*
+            fos_twitter: true
+        public:
+            pattern:   /.*
+            anonymous: true
+            fos_twitter: true
+            logout: true
+            # oauth:
+            #     resource_owners:
+            #         # my_github:          "/login/check-github"
+            #         # my_google:          "/login/check-google"
+            #         # facebook:           "/login/check-facebook"
+            #         my_custom:          "/login/check-twitter"
+            #     login_path:        /login
+            #     failure_path:      /login
 
+            #     oauth_user_provider:
+            #         service: fran_user_provider
         # secured_area:
         #     pattern:    ^/secured/
         #     oauth:
         #         oauth_provider:    github
-        #        client_id:         <your_oauth_client_id>
-        #        secret:            <your_oauth_secret>
-        #        scope:             <your_oauth_scope>
+        #         client_id:         %github_client_id%
+        #         secret:            %github_client_secret%
+        #         scope:             user
         #         check_path:        /secured/login_check
         #         login_path:        /secured/login
         #         failure_path:      /
@@ -61,7 +67,8 @@ security:
             pattern: ^/
             anonymous: ~
     factories:
-        OAuthFactory: "%kernel.root_dir%/../vendor/bundles/Knp/Bundle/OAuthBundle/Resources/config/security_factories.xml"
+        OAuthFactory: "%kernel.root_dir%/../vendor/bundles/HWI/Bundle/OAuthBundle/Resources/config/security_factory.xml"
+        FOSTwitterFactory: "%kernel.root_dir%/../vendor/bundles/FOS/TwitterBundle/Resources/config/security_factories.xml"
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

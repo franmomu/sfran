@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             new Fran\UserBundle\FranUserBundle(),
             new Knp\Bundle\OAuthBundle\KnpOAuthBundle(),
             new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new FOS\TwitterBundle\FOSTwitterBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

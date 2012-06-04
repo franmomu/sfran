@@ -61,3 +61,22 @@ swiftmailer:
 jms_security_extra:
     secure_controllers:  true
     secure_all_services: false
+
+fos_twitter:
+        file: %kernel.root_dir%/../vendor/twitteroauth/twitteroauth/twitteroauth.php
+        consumer_key: %twitter_consumer_key%
+        consumer_secret: %twitter_consumer_secret%
+        callback_url: http://www.mascotinas.com/secured/login_check
+
+hwi_oauth:
+    resource_owners:
+        my_github:
+            type:           github
+            client_id:      %github_client_id%
+            client_secret:  %github_client_secret%
+            scope:          ""
+        my_google:
+            type:                google
+            client_id:           %google_client_id%
+            client_secret:       %google_client_secret%
+            scope:               ""

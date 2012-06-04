@@ -17,14 +17,14 @@ use Symfony\Component\Security\Core\User\UserProviderInterface,
 
 use Fran\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
-
+use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
+use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 /**
  * OAuthUserProvider
  *
  * @author Geoffrey Bachelet <geoffrey.bachelet@gmail.com>
  */
-class OAuthUserProvider implements UserProviderInterface
+class OAuthUserProvider implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
 
     protected $container;
@@ -74,5 +74,13 @@ class OAuthUserProvider implements UserProviderInterface
     public function supportsClass($class)
     {
         return $class === 'Fran\UserBundle\Entity\User';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function loadUserByOAuthUserResponse(UserResponseInterface $response)
+    {
+        return $this->loadUserByUsername($response->getUsername());
     }
 }

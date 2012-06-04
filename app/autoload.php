@@ -16,6 +16,8 @@ $loader->registerNamespaces(array(
     'Metadata'         => __DIR__.'/../vendor/metadata/src',
     'Doctrine\\Common\\DataFixtures' => __DIR__.'/../vendor/doctrine-fixtures/lib',
     'Knp'              => __DIR__.'/../vendor/bundles',
+    'HWI'              => __DIR__.'/../vendor/bundles',
+    'FOS'              => __DIR__.'/../vendor/bundles',
     'Buzz'             => __DIR__.'/../vendor/Buzz/lib'
 ));
 $loader->registerPrefixes(array(
