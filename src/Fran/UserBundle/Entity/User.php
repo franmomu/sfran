@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="Fran\UserBundle\Entity\UserRepository")
  */
-class User extends BaseUser
+class User extends BaseUser implements \Serializable
 {
 	/**
      * @var integer $id
@@ -93,5 +93,15 @@ class User extends BaseUser
     public function equals(UserInterface $user)
     {
         return $this->getEmail() == $user->getEmail() || $this->username == $user->getUsername();
+    }
+
+    public function serialize()
+    {
+       return serialize($this->getId());
+    }
+
+    public function unserialize($data)
+    {
+        $this->id = unserialize($data);
     }
 }
